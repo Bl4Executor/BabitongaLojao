@@ -37,40 +37,6 @@ body {
   overflow-x: hidden;
 }
 
-/* CURSOR CUSTOMIZADO IMERSIVO (APENAS COMPUTADORES COM RATO) */
-@media (hover: hover) and (pointer: fine) {
-  body { cursor: none; }
-  #cursor {
-    position: fixed;
-    width: 12px; height: 12px;
-    background: var(--orange);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 99999;
-    transform: translate(-50%, -50%);
-    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
-    mix-blend-mode: difference;
-  }
-  #cursor-ring {
-    position: fixed;
-    width: 44px; height: 44px;
-    border: 1.5px solid rgba(240,120,32,0.5);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 99998;
-    transform: translate(-50%, -50%);
-    transition: all 0.15s ease-out;
-  }
-  body:hover #cursor { opacity: 1; }
-  .cursor-grow #cursor { width: 60px; height: 60px; background: rgba(240,120,32,0.8); mix-blend-mode: normal; }
-  .cursor-grow #cursor-ring { width: 90px; height: 90px; opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
-}
-
-/* GARANTIR QUE DESAPARECE EM DISPOSITIVOS TÁTEIS */
-@media (hover: none) and (pointer: coarse) {
-  #cursor, #cursor-ring { display: none !important; }
-}
-
 /* PRELOADER */
 #preloader {
   position: fixed; inset: 0;
@@ -214,7 +180,7 @@ nav.desktop a:hover::after { width: 100%; }
 #hamburger {
   display: none;
   flex-direction: column; gap: 5px;
-  background: none; border: none; cursor: default;
+  background: none; border: none; cursor: pointer;
   padding: 4px;
 }
 #hamburger span {
@@ -905,6 +871,7 @@ nav.desktop a:hover::after { width: 100%; }
   position: absolute; inset: 0;
   background: var(--blue);
   transform: translateX(-101%);
+  border-radius: 50px;
   transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
 }
 .btn-cta:hover::before { transform: translateX(0); }
@@ -1033,11 +1000,10 @@ a.contact-line:hover { color: rgba(255,255,255,0.8); }
 </head>
 <body>
 
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
-
+<!-- PROGRESSO -->
 <div id="progress"></div>
 
+<!-- PRELOADER -->
 <div id="preloader">
   <div id="preloader-logo">BABITONGA</div>
   <div id="preloader-bar-wrap">
@@ -1045,6 +1011,7 @@ a.contact-line:hover { color: rgba(255,255,255,0.8); }
   </div>
 </div>
 
+<!-- MOBILE MENU -->
 <div id="mobile-menu">
   <a href="#inicio" onclick="closeMobileMenu()">Início</a>
   <a href="#sobre" onclick="closeMobileMenu()">Sobre</a>
@@ -1054,6 +1021,7 @@ a.contact-line:hover { color: rgba(255,255,255,0.8); }
   <a href="https://wa.me/5547991664203?text=Olá!%20Gostaria%20de%20um%20orçamento." target="_blank" style="color:var(--orange);">WhatsApp</a>
 </div>
 
+<!-- HEADER -->
 <header id="header">
   <a href="#inicio" class="logo-wrap" aria-label="Voltar para o Início">
     <div class="logo-mark">B</div>
@@ -1083,6 +1051,7 @@ a.contact-line:hover { color: rgba(255,255,255,0.8); }
   </button>
 </header>
 
+<!-- HERO -->
 <section id="inicio">
   <div style="min-height:100vh; position:relative; display:flex; flex-direction:column; justify-content:flex-end; padding: 140px 48px 80px; overflow:hidden;">
     <div id="hero-video-bg"></div>
@@ -1117,6 +1086,7 @@ a.contact-line:hover { color: rgba(255,255,255,0.8); }
   </div>
 </section>
 
+<!-- MARQUEE -->
 <div class="marquee-strip">
   <div class="marquee-inner" id="marquee-inner">
     <span>Atendimento Humanizado</span><span class="dot"></span>
@@ -1138,6 +1108,7 @@ a.contact-line:hover { color: rgba(255,255,255,0.8); }
   </div>
 </div>
 
+<!-- SOBRE -->
 <section id="sobre">
   <div class="sobre-grid">
     <div class="sobre-visual reveal-left">
@@ -1190,13 +1161,14 @@ a.contact-line:hover { color: rgba(255,255,255,0.8); }
       </div>
 
       <a href="https://wa.me/5547991664203" target="_blank" aria-label="Falar com Especialista" class="btn-blue">
-        <i data-lucide="users"></i>
+        <i data-lucide="users" style="width:16px;height:16px;"></i>
         Falar com Especialista
       </a>
     </div>
   </div>
 </section>
 
+<!-- DIFERENCIAIS -->
 <section id="diferenciais">
   <div class="dif-header">
     <h2 class="dif-title reveal-up">Força Corporativa.<br><span class="accent">Proximidade</span><br>Humana.</h2>
@@ -1239,6 +1211,7 @@ a.contact-line:hover { color: rgba(255,255,255,0.8); }
   </div>
 </section>
 
+<!-- GALERIA -->
 <section id="galeria">
   <div class="gal-header">
     <div>
@@ -1289,6 +1262,7 @@ a.contact-line:hover { color: rgba(255,255,255,0.8); }
   </div>
 </section>
 
+<!-- NÚMEROS (EFEITO IMERSIVO E TRANQUILO) -->
 <section id="numeros">
   <div class="nums-grid">
     <div class="num-item num-reveal">
@@ -1310,6 +1284,7 @@ a.contact-line:hover { color: rgba(255,255,255,0.8); }
   </div>
 </section>
 
+<!-- REDES SOCIAIS -->
 <section id="social">
   <div class="section-eyebrow" style="justify-content:center; margin-bottom:16px;">Nossas Redes</div>
   <h2 class="social-title reveal-up">Acompanhe nossa <em>rotina!</em></h2>
@@ -1323,6 +1298,7 @@ a.contact-line:hover { color: rgba(255,255,255,0.8); }
   </div>
 </section>
 
+<!-- CTA FINAL -->
 <section id="cta">
   <div class="cta-bg"></div>
   <div style="position:relative; z-index:1;">
@@ -1336,6 +1312,7 @@ a.contact-line:hover { color: rgba(255,255,255,0.8); }
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer id="contato">
   <div class="footer-grid">
     <div class="footer-brand">
@@ -1348,6 +1325,7 @@ a.contact-line:hover { color: rgba(255,255,255,0.8); }
       </a>
       <p>Fornecendo solidez, insumos normatizados e pontualidade logística para o ecossistema da construção de São Francisco do Sul.</p>
       
+      <!-- SEÇÃO DE CONTATOS -->
       <div class="footer-social">
         <a href="https://wa.me/5547991664203" target="_blank" aria-label="WhatsApp">
           <i data-lucide="message-circle"></i>
@@ -1396,33 +1374,6 @@ a.contact-line:hover { color: rgba(255,255,255,0.8); }
 <script>
 // INITIALIZE LÚCIDE ICONS
 lucide.createIcons();
-
-// CURSOR (GARANTIDO APENAS PARA COMPUTADORES COM MOUSE)
-if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursor-ring');
-  let cx = 0, cy = 0, rx = 0, ry = 0;
-
-  document.addEventListener('mousemove', e => {
-    cx = e.clientX; cy = e.clientY;
-    cursor.style.left = cx + 'px';
-    cursor.style.top = cy + 'px';
-  });
-
-  function animateRing() {
-    rx += (cx - rx) * 0.12;
-    ry += (cy - ry) * 0.12;
-    ring.style.left = rx + 'px';
-    ring.style.top = ry + 'px';
-    requestAnimationFrame(animateRing);
-  }
-  animateRing();
-
-  document.querySelectorAll('a, button, .card-dif, .gal-item').forEach(el => {
-    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-grow'));
-    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-grow'));
-  });
-}
 
 // PROGRESS BAR
 const progress = document.getElementById('progress');
