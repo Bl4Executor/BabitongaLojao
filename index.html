@@ -81,7 +81,7 @@ body:hover #cursor { opacity: 1; }
   opacity: 0;
 }
 #preloader-bar-wrap {
-  width: 200px; height: 1px;
+  width: 200px; height: 2px;
   background: rgba(255,255,255,0.15);
   border-radius: 2px;
   overflow: hidden;
@@ -145,7 +145,7 @@ body::before {
   font-size: 22px;
   letter-spacing: 0.05em;
   color: #fff;
-  border-radius: 12px;
+  border-radius: 12px; /* Cantos arredondados restaurados */
   transition: transform 0.6s cubic-bezier(0.34,1.56,0.64,1);
 }
 .logo-wrap:hover .logo-mark { transform: scale(1.05); }
@@ -186,6 +186,8 @@ nav.desktop a::after {
 }
 nav.desktop a:hover { color: #fff; }
 nav.desktop a:hover::after { width: 100%; }
+
+/* BOTÕES ESTILO PÍLULA (Bordas Arredondadas) */
 .btn-wpp {
   display: flex; align-items: center; gap: 8px;
   background: var(--orange);
@@ -735,7 +737,7 @@ nav.desktop a:hover::after { width: 100%; }
   letter-spacing: 0.02em;
 }
 
-/* NÚMEROS (EFEITO IMERSIVO E TRANQUILO) */
+/* NÚMEROS */
 #numeros {
   background: linear-gradient(120deg, #061f45, #0a2d61, #061f45);
   background-size: 200% 200%;
@@ -897,7 +899,6 @@ nav.desktop a:hover::after { width: 100%; }
   position: absolute; inset: 0;
   background: var(--blue);
   transform: translateX(-101%);
-  border-radius: 50px;
   transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
 }
 .btn-cta:hover::before { transform: translateX(0); }
@@ -926,12 +927,11 @@ footer {
   margin: 20px 0 28px;
 }
 
-/* PADRONIZAÇÃO EXATA DOS ÍCONES DE REDES SOCIAIS (LUCIDE) - APENAS OS QUE IMPORTAM */
 .footer-social { display: flex; gap: 12px; flex-wrap: wrap; }
 .footer-social a {
   width: 42px; height: 42px;
   border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 12px;
+  border-radius: 50px; /* Arredondado também aqui */
   display: flex; align-items: center; justify-content: center;
   color: rgba(255,255,255,0.4);
   text-decoration: none;
@@ -1013,7 +1013,12 @@ a.contact-line:hover { color: rgba(255,255,255,0.8); }
   .footer-grid { grid-template-columns: 1fr; gap: 40px; }
   .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
   .hero-scroll-hint { display: none; }
+  
   .nums-grid { grid-template-columns: repeat(2, 1fr); }
+  .num-item { padding: 20px 10px; } 
+  .num-value { font-size: clamp(42px, 10vw, 56px); } 
+  .num-label { font-size: 9px; }
+  
   .sobre-tag { display: none; }
   .sobre-badge { right: -12px; }
   .gal-header { flex-direction: column; gap: 16px; }
@@ -1044,7 +1049,7 @@ a.contact-line:hover { color: rgba(255,255,255,0.8); }
   <a href="#diferenciais" onclick="closeMobileMenu()">Diferenciais</a>
   <a href="#galeria" onclick="closeMobileMenu()">Galeria</a>
   <a href="#contato" onclick="closeMobileMenu()">Contato</a>
-  <a href="https://wa.me/5547991664203?text=Olá!%20Gostaria%20de%20um%20orçamento." target="_blank" style="color:var(--orange);">WhatsApp</a>
+  <a href="https://wa.me/554730710128?text=Olá!%20Gostaria%20de%20um%20orçamento." target="_blank" style="color:var(--orange);">WhatsApp</a>
 </div>
 
 <!-- HEADER -->
@@ -1065,8 +1070,8 @@ a.contact-line:hover { color: rgba(255,255,255,0.8); }
     <a href="#contato">Contato</a>
   </nav>
 
-  <a href="https://wa.me/5547991664203?text=Olá!%20Gostaria%20de%20um%20orçamento." target="_blank" aria-label="Falar no WhatsApp" class="btn-wpp desktop">
-    <i data-lucide="message-circle"></i>
+  <a href="https://wa.me/554730710128?text=Olá!%20Gostaria%20de%20um%20orçamento." target="_blank" aria-label="Falar no WhatsApp" class="btn-wpp desktop">
+    <i data-lucide="message-circle" style="width: 16px; height: 16px;"></i>
     WhatsApp
   </a>
 
@@ -1094,8 +1099,8 @@ a.contact-line:hover { color: rgba(255,255,255,0.8); }
       </h1>
       <p class="hero-desc">Da fundação ao acabamento, a Babitonga oferece os materiais certos para transformar projetos em realidade com excelência e pontualidade.</p>
       <div class="hero-ctas">
-        <a href="https://wa.me/5547991664203?text=Olá!%20Gostaria%20de%20um%20orçamento." target="_blank" aria-label="Falar no WhatsApp" class="btn-primary">
-          <i data-lucide="message-circle"></i>
+        <a href="https://wa.me/554730710128?text=Olá!%20Gostaria%20de%20um%20orçamento." target="_blank" aria-label="Falar no WhatsApp" class="btn-primary">
+          <i data-lucide="message-circle" style="width:18px;height:18px;"></i>
           <span>Falar no WhatsApp</span>
         </a>
         <a href="#galeria" aria-label="Conhecer a Loja" class="btn-secondary">
@@ -1186,8 +1191,8 @@ a.contact-line:hover { color: rgba(255,255,255,0.8); }
         </div>
       </div>
 
-      <a href="https://wa.me/5547991664203" target="_blank" aria-label="Falar com Especialista" class="btn-blue">
-        <i data-lucide="users"></i>
+      <a href="https://wa.me/554730710128" target="_blank" aria-label="Falar com Especialista" class="btn-blue">
+        <i data-lucide="users" style="width:16px;height:16px;"></i>
         Falar com Especialista
       </a>
     </div>
@@ -1331,7 +1336,7 @@ a.contact-line:hover { color: rgba(255,255,255,0.8); }
     <div class="cta-eyebrow">Fale Conosco</div>
     <h2 class="cta-title reveal-up">Precisa de ajuda para sua <span class="accent">Obra?</span></h2>
     <p class="cta-desc">Nossa equipe está pronta para realizar o levantamento técnico do seu pedido, com as melhores opções de faturamento e agendamento logístico.</p>
-    <a href="https://wa.me/5547991664203?text=Olá!%20Preciso%20de%20ajuda%20para%20minha%20obra." target="_blank" aria-label="Chamar no WhatsApp" class="btn-cta">
+    <a href="https://wa.me/554730710128?text=Olá!%20Preciso%20de%20ajuda%20para%20minha%20obra." target="_blank" aria-label="Chamar no WhatsApp" class="btn-cta">
       <i data-lucide="message-circle"></i>
       <span>Chamar no WhatsApp</span>
     </a>
@@ -1353,13 +1358,13 @@ a.contact-line:hover { color: rgba(255,255,255,0.8); }
       
       <!-- SEÇÃO DE CONTATOS -->
       <div class="footer-social">
-        <a href="https://wa.me/5547991664203" target="_blank" aria-label="WhatsApp">
+        <a href="https://wa.me/554730710128" target="_blank" aria-label="WhatsApp">
           <i data-lucide="message-circle"></i>
         </a>
         <a href="mailto:contato@babitonga.com.br" aria-label="E-mail">
           <i data-lucide="mail"></i>
         </a>
-        <a href="tel:+5547991664203" aria-label="Telefone">
+        <a href="tel:+554730710128" aria-label="Telefone">
           <i data-lucide="phone"></i>
         </a>
       </div>
@@ -1380,9 +1385,9 @@ a.contact-line:hover { color: rgba(255,255,255,0.8); }
         <i data-lucide="map-pin"></i>
         São Francisco do Sul, SC · Atendimento Regional
       </div>
-      <a href="tel:+5547991664203" class="contact-line" aria-label="Ligar para a empresa">
+      <a href="tel:+554730710128" class="contact-line" aria-label="Ligar para a empresa">
         <i data-lucide="phone"></i>
-        (47) 99166-4203
+        (47) 3071-0128
       </a>
       <div class="contact-line">
         <i data-lucide="clock"></i>
