@@ -326,6 +326,11 @@ nav.desktop a::after {
 nav.desktop a:hover { color: #fff; }
 nav.desktop a:hover::after { width: 100%; }
 
+.nav-esg-link span { transition: color 0.4s ease; display: inline-block; }
+.nav-esg-link:hover .e { color: #10b981; }
+.nav-esg-link:hover .s { color: #ef4444; }
+.nav-esg-link:hover .g { color: #3b82f6; }
+
 .btn-wpp {
   display: inline-flex;
   align-items: center;
@@ -1334,6 +1339,7 @@ footer {
   <a href="#diferenciais" onclick="toggleMenu()">Diferenciais</a>
   <a href="#galeria" onclick="toggleMenu()">Galeria</a>
   <a href="#contato" onclick="toggleMenu()">Contato</a>
+  <a href="esg.html" target="_blank" onclick="toggleMenu()" class="nav-esg-link"><span class="e">E</span><span class="s">S</span><span class="g">G</span></a>
 </div>
 
 <!-- NAVIGATION BAR -->
@@ -1352,6 +1358,7 @@ footer {
     <a href="#diferenciais">Diferenciais</a>
     <a href="#galeria">Galeria</a>
     <a href="#contato">Contato</a>
+    <a href="esg.html" target="_blank" class="nav-esg-link"><span class="e">E</span><span class="s">S</span><span class="g">G</span></a>
   </nav>
 
   <a href="https://wa.me/5547991664203?text=Olá!%20Gostaria%20de%20um%20orçamento." target="_blank" class="btn-wpp desktop" aria-label="Falar no WhatsApp">
