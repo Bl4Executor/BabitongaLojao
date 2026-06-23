@@ -2213,36 +2213,45 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 (function() {
   let touchStartX = 0;
   let touchStartY = 0;
+  let touchStartActive = false;
 
   document.addEventListener('touchstart', (e) => {
     if (window.innerWidth > 768) return;
     const target = e.target;
-    if (!menuOpen) {
-      if (target.closest('a, button, input, select, textarea, .card-dif, .gal-item, .testimonial-card')) return;
-    } else {
-      if (target.closest('a, button')) return;
-    }
+    if (target.closest('a, button, input, select, textarea')) return;
     touchStartX = e.changedTouches[0].clientX;
     touchStartY = e.changedTouches[0].clientY;
+    touchStartActive = true;
   }, { passive: true });
 
-  document.addEventListener('touchend', (e) => {
-    if (window.innerWidth > 768) return;
-    const touchEndX = e.changedTouches[0].clientX;
-    const touchEndY = e.changedTouches[0].clientY;
-    const diffX = touchEndX - touchStartX;
-    const diffY = touchEndY - touchStartY;
+  document.addEventListener('touchmove', (e) => {
+    if (!touchStartActive || window.innerWidth > 768) return;
+    const touchCurrentX = e.changedTouches[0].clientX;
+    const touchCurrentY = e.changedTouches[0].clientY;
+    const diffX = touchCurrentX - touchStartX;
+    const diffY = touchCurrentY - touchStartY;
     const thresholdX = 60;
     const maxThresholdY = 40;
 
-    if (Math.abs(diffX) > thresholdX && Math.abs(diffY) < maxThresholdY) {
-      if (diffX < 0) {
-        if (!menuOpen) toggleMenu();
-      } else {
-        if (menuOpen) toggleMenu();
+    if (Math.abs(diffY) < maxThresholdY) {
+      if (diffX < -thresholdX) {
+        if (!menuOpen) {
+          toggleMenu();
+          touchStartActive = false;
+        }
+      } else if (diffX > thresholdX) {
+        if (menuOpen) {
+          toggleMenu();
+          touchStartActive = false;
+        }
       }
+    } else {
+      touchStartActive = false;
     }
   }, { passive: true });
+
+  document.addEventListener('touchend', () => { touchStartActive = false; }, { passive: true });
+  document.addEventListener('touchcancel', () => { touchStartActive = false; }, { passive: true });
 })();
 
 </script>
