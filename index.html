@@ -211,6 +211,15 @@ body.has-mouse .cursor-grow #cursor-ring {
   animation: orbFloat 10s ease-in-out infinite;
 }
 
+@media (max-width: 768px) {
+  .glow-bg {
+    width: 70vw;
+    height: 70vw;
+    max-width: 280px;
+    filter: blur(80px);
+  }
+}
+
 @keyframes orbFloat {
   0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
   33% { transform: translate(2%, -4%) scale(1.05); opacity: 0.5; }
@@ -381,13 +390,12 @@ nav.desktop a:hover::after { width: 100%; }
   transition: transform 0.3s, opacity 0.3s;
 }
 
-/* MOBILE NAV MENU */
 #mobile-menu {
   position: fixed;
   inset: 0;
-  background: rgba(12, 21, 36, 0.96);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
+  background: rgba(12, 21, 36, 0.72);
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
   z-index: 999;
   display: flex;
   flex-direction: column;
@@ -396,6 +404,11 @@ nav.desktop a:hover::after { width: 100%; }
   gap: 32px;
   transform: translateY(-100%);
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  #mobile-menu {
+    background: rgba(12, 21, 36, 0.96);
+  }
 }
 
 #mobile-menu.open { transform: translateY(0); }
@@ -578,6 +591,7 @@ section.py-section {
   padding: 120px 24px;
   position: relative;
   z-index: 2;
+  overflow: hidden;
 }
 
 .section-container {
@@ -1370,7 +1384,7 @@ footer {
   <a href="#diferenciais" onclick="toggleMenu()">Diferenciais</a>
   <a href="#galeria" onclick="toggleMenu()">Galeria</a>
   <a href="#contato" onclick="toggleMenu()">Contato</a>
-  <a href="https://esg-eight-tau.vercel.app/" onclick="toggleMenu()" class="nav-esg-link"><span class="e">E</span><span class="s">S</span><span class="g">G</span></a>
+  <a href="esg.html" onclick="toggleMenu()" class="nav-esg-link"><span class="e">E</span><span class="s">S</span><span class="g">G</span></a>
 </div>
 
 <!-- NAVIGATION BAR -->
@@ -1389,7 +1403,7 @@ footer {
     <a href="#diferenciais">Diferenciais</a>
     <a href="#galeria">Galeria</a>
     <a href="#contato">Contato</a>
-    <a href="https://esg-eight-tau.vercel.app/" class="nav-esg-link"><span class="e">E</span><span class="s">S</span><span class="g">G</span></a>
+    <a href="esg.html" class="nav-esg-link"><span class="e">E</span><span class="s">S</span><span class="g">G</span></a>
   </nav>
 
   <a href="https://wa.me/5547991664203?text=Olá!%20Gostaria%20de%20um%20orçamento." target="_blank" class="btn-wpp desktop" aria-label="Falar no WhatsApp">
@@ -1683,7 +1697,7 @@ footer {
       <p style="color: var(--text-muted); margin-top: 16px; line-height: 1.7;">Siga-nos no Instagram para acompanhar novos produtos, dicas e nosso dia a dia em São Francisco do Sul.</p>
       <div class="social-btns">
         <a href="https://instagram.com/babitongamateriais" target="_blank" class="btn-instagram" aria-label="Siga no Instagram">
-          <i data-lucide="instagram"></i>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram" style="width: 16px; height: 16px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
           <span>Seguir no Instagram</span>
         </a>
       </div>
@@ -1768,7 +1782,10 @@ lucide.createIcons();
 // ANIMATED BACKGROUND - WEBGL (THREE.JS) - Shader.se Style
 const container = document.getElementById('webgl-container');
 let scene, camera, renderer, material, uniforms;
-const isMobileDevice = window.innerWidth <= 768;
+const isMobileDevice = /Mobi|Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent) 
+  || window.innerWidth <= 768 
+  || ('ontouchstart' in window) 
+  || (navigator.maxTouchPoints > 0);
 
 if (container && typeof THREE !== 'undefined' && !isMobileDevice) {
   scene = new THREE.Scene();
@@ -1983,33 +2000,35 @@ function startHeroAnimations() {
     .from('.hero-ctas', { opacity: 0, y: 20, duration: 0.6 }, '-=0.3')
     .from('.glow-bg', { opacity: 0, scale: 0.5, duration: 1, stagger: 0.2 }, '-=0.8');
     
-  // "ENTERING THE TV" IMMERSIVE SCROLL ANIMATION
-  const portalTl = gsap.timeline({
-    scrollTrigger: {
-      trigger: '#inicio',
-      start: 'top top',
-      end: '+=1000', // Adjusted duration for a perfect dive
-      scrub: 1,
-      pin: true,
-      pinSpacing: true, // MUST be true so we don't skip the next sections!
-      anticipatePin: 1
-    }
-  });
+  // "ENTERING THE TV" IMMERSIVE SCROLL ANIMATION (Desktop only)
+  if (!isMobileDevice) {
+    const portalTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#inicio',
+        start: 'top top',
+        end: '+=1000', // Adjusted duration for a perfect dive
+        scrub: 1,
+        pin: true,
+        pinSpacing: true, // MUST be true so we don't skip the next sections!
+        anticipatePin: 1
+      }
+    });
 
-  // Deep zoom the background and fade it out VERY LATE (power3.in)
-  // so the user flies through the image before it disappears
-  portalTl.to('#hero-bg', {
-    scale: 20,
-    opacity: 0,
-    ease: 'power3.in'
-  }, 0);
+    // Deep zoom the background and fade it out VERY LATE (power3.in)
+    // so the user flies through the image before it disappears
+    portalTl.to('#hero-bg', {
+      scale: 20,
+      opacity: 0,
+      ease: 'power3.in'
+    }, 0);
 
-  // Fade out the content without scaling to prevent text glitches
-  portalTl.to('#hero-content, .glow-bg', {
-    y: -100,
-    opacity: 0,
-    ease: 'power2.in'
-  }, 0);
+    // Fade out the content without scaling to prevent text glitches
+    portalTl.to('#hero-content, .glow-bg', {
+      y: -100,
+      opacity: 0,
+      ease: 'power2.in'
+    }, 0);
+  }
 }
 
 // SCROLL PROGRESS & HEADER EFFECT
