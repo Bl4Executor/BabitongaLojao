@@ -1297,13 +1297,34 @@ footer {
 }
 
 @media (max-width: 768px) {
-  #header { width: calc(100% - 24px); padding: 10px 16px; }
-  nav.desktop, .btn-wpp.desktop { display: none; }
-  #hamburger { display: flex; }
+  #header { 
+    width: calc(100% - 32px); 
+    padding: 10px 16px; 
+  }
+  .logo-mark { 
+    transform: scale(1.4); 
+    margin-right: 8px; 
+    margin-left: 4px; 
+  }
+  .logo-title { font-size: 13px; }
+  
+  nav.desktop, .btn-wpp.desktop { display: none !important; }
+  #hamburger { display: flex; z-index: 1001; }
+  
+  .hero-title { font-size: 32px; }
+  .hero-desc { font-size: 15px; padding: 0 10px; }
+  .hero-ctas { flex-direction: column; width: 100%; gap: 12px; }
+  .hero-ctas .btn-primary, .hero-ctas .btn-secondary { width: 100%; justify-content: center; }
+
   .bento-grid { grid-template-columns: 1fr; }
   .nums-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
   .num-item:not(:last-child)::after { display: none; }
   .nums-wrapper { padding: 40px 24px; }
+  
+  .sobre-badge { padding: 20px 24px; bottom: -10px; right: -10px; }
+  .sobre-badge-num { font-size: 40px; }
+  .timeline { padding: 24px; }
+
   .footer-grid { grid-template-columns: 1fr; gap: 40px; }
   .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
   .social-panel { padding: 40px 24px; }
