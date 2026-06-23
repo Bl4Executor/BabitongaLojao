@@ -2209,6 +2209,42 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
+// SWIPE GESTURE FOR MOBILE MENU
+(function() {
+  let touchStartX = 0;
+  let touchStartY = 0;
+
+  document.addEventListener('touchstart', (e) => {
+    if (window.innerWidth > 768) return;
+    const target = e.target;
+    if (!menuOpen) {
+      if (target.closest('a, button, input, select, textarea, .card-dif, .gal-item, .testimonial-card')) return;
+    } else {
+      if (target.closest('a, button')) return;
+    }
+    touchStartX = e.changedTouches[0].clientX;
+    touchStartY = e.changedTouches[0].clientY;
+  }, { passive: true });
+
+  document.addEventListener('touchend', (e) => {
+    if (window.innerWidth > 768) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const touchEndY = e.changedTouches[0].clientY;
+    const diffX = touchEndX - touchStartX;
+    const diffY = touchEndY - touchStartY;
+    const thresholdX = 60;
+    const maxThresholdY = 40;
+
+    if (Math.abs(diffX) > thresholdX && Math.abs(diffY) < maxThresholdY) {
+      if (diffX < 0) {
+        if (!menuOpen) toggleMenu();
+      } else {
+        if (menuOpen) toggleMenu();
+      }
+    }
+  }, { passive: true });
+})();
+
 </script>
 </body>
 </html>
